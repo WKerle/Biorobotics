@@ -42,7 +42,7 @@ class LineFollower:
                 # Middle and right sensor on
                 if not self.isSetBack:
                     setBack(self)
-                    time.sleep(0.5)
+                    time.sleep(0.1)
                 turnRight()
                 self.isSetBack = False
             elif self.LMR == 4:
@@ -55,11 +55,13 @@ class LineFollower:
                 # middle and left sensor on -> turn left
                 if not self.isSetBack:
                     setBack(self)
-                    time.sleep(0.5)
+                    time.sleep(0.1)
                 turnLeft()
                 self.isSetBack = False
             elif self.LMR == 7:
                 # pass
+                setBack(self)
+                time.sleep(0.5)
                 PWM.setMotorModel(0, 0, 0, 0)
 
 
