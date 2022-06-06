@@ -41,7 +41,7 @@ def handleModeSwitch(mode):
         turnRight()
     elif mode == 2:
         # Only middle sensor is on -> full speed!
-        PWM.setMotorModel(1000, 1000, 1000, 1000)
+        PWM.setMotorModel(2000, 2000, 2000, 2000)
     elif mode == 3:
         # Middle and right sensor on
         turnRight()
@@ -60,11 +60,11 @@ def handleModeSwitch(mode):
 
 
 def turnLeft():
-    PWM.setMotorModel(-1500, -1500, 2500, 2500)
+    PWM.setMotorModel(-1500, -1500, -500, -500)
 
 
 def turnRight():
-    PWM.setMotorModel(2500, 2500, -1500, -1500)
+    PWM.setMotorModel(-500, -500, -1500, -1500)
 
 
 def setBack(self):
