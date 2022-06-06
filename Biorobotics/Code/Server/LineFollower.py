@@ -8,6 +8,7 @@ import RPi.GPIO as GPIO
 # IR03 -> Right
 
 class LineFollower:
+    isSetBack = False
     def __init__(self):
         self.IR01 = 14
         self.IR02 = 15
@@ -17,7 +18,7 @@ class LineFollower:
         GPIO.setup(self.IR02, GPIO.IN)
         GPIO.setup(self.IR03, GPIO.IN)
 
-    def run(self):
+    def run(self, isSetBack=isSetBack):
         while True:
             self.LMR = 0x00
             if GPIO.input(self.IR01):
@@ -38,9 +39,11 @@ class LineFollower:
                 PWM.setMotorModel(2000, 2000, 2000, 2000)
             elif self.LMR == 3:
                 # Middle and right sensor on
-                setBack()
-                time.sleep(0.5)
+                if not isSetBack:
+                    setBack()
+                    time.sleep(0.5)
                 turnRight()
+                isSetBack = False
             elif self.LMR == 4:
                 # only left sensor on -> turn left
                 turnLeft()
@@ -49,9 +52,11 @@ class LineFollower:
                 PWM.setMotorModel(1000, 1000, 1000, 1000)
             elif self.LMR == 6:
                 # middle and left sensor on -> turn left
-                setBack()
-                time.sleep(0.5)
+                if not isSetBack:
+                    setBack()
+                    time.sleep(0.5)
                 turnLeft()
+                isSetBack = False
             elif self.LMR == 7:
                 # pass
                 PWM.setMotorModel(0, 0, 0, 0)
@@ -66,6 +71,7 @@ def turnRight():
 
 
 def setBack():
+    isSetBack = True
     PWM.setMotorModel(-1000, -1000, -1000, -1000)
 
 
