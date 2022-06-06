@@ -32,20 +32,20 @@ class LineFollower:
 
             if self.LMR == 1:
                 # Only left is on -> turn left
-                PWM.setMotorModel(25, 25, 0, 0)
+                PWM.setMotorModel(1000, 1000, 0, 0)
             elif self.LMR == 2:
                 # Only middle sensor is on -> full speed!
-                PWM.setMotorModel(10, 10, 10, 10)
+                PWM.setMotorModel(1000, 1000, 1000, 1000)
             elif self.LMR == 3:
                 # Middle and right sensor on
-                PWM.setMotorModel(40, 40, 0, 0)
+                PWM.setMotorModel(1000, 1000, 0, 0)
             elif self.LMR == 4:
-                PWM.setMotorModel(0, 0, 25, 25)
+                PWM.setMotorModel(0, 0, 1000, 1000)
             elif self.LMR == 5:
                 # Left and right sensor on -> fun mode?
-                PWM.setMotorModel(10, 10, 10, 10)
+                PWM.setMotorModel(1000, 1000, 1000, 1000)
             elif self.LMR == 6:
-                PWM.setMotorModel(0, 0, 40, 40)
+                PWM.setMotorModel(0, 0, 1000, 1000)
             elif self.LMR == 7:
                 # pass
                 PWM.setMotorModel(0, 0, 0, 0)
