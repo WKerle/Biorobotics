@@ -1,0 +1,32 @@
+
+            if self.LMR == 1:
+                # Only right is on -> turn right
+                turnRight()
+            elif self.LMR == 2:
+                # Only middle sensor is on -> full speed!
+                PWM.setMotorModel(2000, 2000, 2000, 2000)
+            elif self.LMR == 3:
+                # Middle and right sensor on
+                if not self.isSetBack:
+                    setBack(self)
+                    time.sleep(0.1)
+                turnRight()
+                self.isSetBack = False
+            elif self.LMR == 4:
+                # only left sensor on -> turn left
+                turnLeft()
+            elif self.LMR == 5:
+                # Left and right sensor on -> fun mode?
+                PWM.setMotorModel(1000, 1000, 1000, 1000)
+            elif self.LMR == 6:
+                # middle and left sensor on -> turn left
+                if not self.isSetBack:
+                    setBack(self)
+                    time.sleep(0.1)
+                turnLeft()
+                self.isSetBack = False
+            elif self.LMR == 7:
+                # pass
+                setBack(self)
+                time.sleep(0.5)
+                PWM.setMotorModel(0, 0, 0, 0)

@@ -32,45 +32,39 @@ class LineFollower:
                 # Right Sensor On
                 self.LMR = (self.LMR | 1)
 
-            if self.LMR == 1:
-                # Only right is on -> turn right
-                turnRight()
-            elif self.LMR == 2:
-                # Only middle sensor is on -> full speed!
-                PWM.setMotorModel(2000, 2000, 2000, 2000)
-            elif self.LMR == 3:
-                # Middle and right sensor on
-                if not self.isSetBack:
-                    setBack(self)
-                    time.sleep(0.1)
-                turnRight()
-                self.isSetBack = False
-            elif self.LMR == 4:
-                # only left sensor on -> turn left
-                turnLeft()
-            elif self.LMR == 5:
-                # Left and right sensor on -> fun mode?
-                PWM.setMotorModel(1000, 1000, 1000, 1000)
-            elif self.LMR == 6:
-                # middle and left sensor on -> turn left
-                if not self.isSetBack:
-                    setBack(self)
-                    time.sleep(0.1)
-                turnLeft()
-                self.isSetBack = False
-            elif self.LMR == 7:
-                # pass
-                setBack(self)
-                time.sleep(0.5)
-                PWM.setMotorModel(0, 0, 0, 0)
+            handleModeSwitch(self.LMR)
+
+
+def handleModeSwitch(mode):
+    if mode == 1:
+        # Only right is on -> turn right
+        turnRight()
+    elif mode == 2:
+        # Only middle sensor is on -> full speed!
+        PWM.setMotorModel(1000, 1000, 1000, 1000)
+    elif mode == 3:
+        # Middle and right sensor on
+        turnRight()
+    elif mode == 4:
+        # only left sensor on -> turn left
+        turnLeft()
+    elif mode == 5:
+        # Left and right sensor on -> fun mode?
+        PWM.setMotorModel(1000, 1000, 1000, 1000)
+    elif mode == 6:
+        # middle and left sensor on -> turn left
+        turnLeft()
+    elif mode == 7:
+        # pass
+        PWM.setMotorModel(0, 0, 0, 0)
 
 
 def turnLeft():
-    PWM.setMotorModel(-1000, -1000, 2000, 2000)
+    PWM.setMotorModel(-1500, -1500, 2500, 2500)
 
 
 def turnRight():
-    PWM.setMotorModel(1000, 2000, -1000, -1000)
+    PWM.setMotorModel(2500, 2500, -1500, -1500)
 
 
 def setBack(self):
