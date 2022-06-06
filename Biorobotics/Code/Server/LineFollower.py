@@ -10,6 +10,7 @@ import RPi.GPIO as GPIO
 
 class LineFollower:
     def __init__(self):
+        self.isSetBack = False
         self.IR01 = 14
         self.IR02 = 15
         self.IR03 = 23
@@ -17,7 +18,6 @@ class LineFollower:
         GPIO.setup(self.IR01, GPIO.IN)
         GPIO.setup(self.IR02, GPIO.IN)
         GPIO.setup(self.IR03, GPIO.IN)
-        isSetBack = False
 
     def run(self):
         while True:
