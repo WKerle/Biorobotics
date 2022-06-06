@@ -31,24 +31,42 @@ class LineFollower:
                 self.LMR = (self.LMR | 1)
 
             if self.LMR == 1:
-                # Only left is on -> turn left
-                PWM.setMotorModel(1000, 1000, -1000, -1000)
+                # Only right is on -> turn right
+                turnRight()
             elif self.LMR == 2:
                 # Only middle sensor is on -> full speed!
-                PWM.setMotorModel(1000, 1000, 1000, 1000)
+                PWM.setMotorModel(2000, 2000, 2000, 2000)
             elif self.LMR == 3:
                 # Middle and right sensor on
-                PWM.setMotorModel(1000, 1000, -1000, -1000)
+                setBack()
+                time.sleep(0.5)
+                turnRight()
             elif self.LMR == 4:
-                PWM.setMotorModel(-1000, -1000, 1000, 1000)
+                # only left sensor on -> turn left
+                turnLeft()
             elif self.LMR == 5:
                 # Left and right sensor on -> fun mode?
                 PWM.setMotorModel(1000, 1000, 1000, 1000)
             elif self.LMR == 6:
-                PWM.setMotorModel(-1000, -1000, 1000, 1000)
+                # middle and left sensor on -> turn left
+                setBack()
+                time.sleep(0.5)
+                turnLeft()
             elif self.LMR == 7:
                 # pass
                 PWM.setMotorModel(0, 0, 0, 0)
+
+
+def turnLeft():
+    PWM.setMotorModel(-1000, -1000, 1000, 1000)
+
+
+def turnRight():
+    PWM.setMotorModel(1000, 1000, -1000, -1000)
+
+
+def setBack():
+    PWM.setMotorModel(-1000, -1000, -1000, -1000)
 
 
 infrared = LineFollower()
