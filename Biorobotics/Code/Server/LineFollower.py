@@ -19,6 +19,7 @@ class LineFollower:
 
     def run(self):
         while True:
+            self.LMR = 0x00
             if GPIO.input(self.IR01):
                 # Left Sensor On
                 self.LMR = (self.LMR | 4)
@@ -28,7 +29,6 @@ class LineFollower:
             if GPIO.input(self.IR03):
                 # Right Sensor On
                 self.LMR = (self.LMR | 1)
-            self.LMR = 0x00
 
             if self.LMR == 1:
                 # Only left is on -> turn left
